@@ -13,7 +13,21 @@
             padding: 20px;
             font-family: 'Roboto', sans-serif;
             color: white;
+            min-height: 100vh;
         }
+
+        .game-section {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background-color: #333;
+            padding: 20px 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .canvas-container {
             display: flex;
             justify-content: center;
@@ -21,13 +35,83 @@
             gap: 20px;
             margin-top: 20px;
         }
+
         canvas {
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
+        /* Documentation styles */
+        .documentation {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .documentation h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 24px;
+            color: #2ECC71;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .documentation h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 18px;
+            color: #E74C3C;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .documentation p {
+            margin-bottom: 15px;
+            color: #ECF0F1;
+            font-size: 16px;
+            letter-spacing: 0.3px;
+        }
+
+        .math-block {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+            color: #2ECC71;
+            font-family: 'Fira Code', monospace;
+            border: 1px solid rgba(46, 204, 113, 0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .documentation ul {
+            margin: 20px 0;
+            padding-left: 30px;
+            color: #ECF0F1;
+        }
+
+        .documentation li {
+            margin: 12px 0;
+            line-height: 1.5;
+        }
+
+        .documentation strong {
+            color: #F1C40F;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Keep existing game-related styles */
         #gameOver {
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -38,19 +122,24 @@
             text-align: center;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             font-family: 'Press Start 2P', cursive;
+            z-index: 2;
         }
+
         #gameOver h2 {
             color: #E74C3C;
             margin-bottom: 20px;
             font-size: 24px;
         }
+
         #gameOver p {
             margin: 10px 0;
             font-size: 16px;
         }
+
         #gameOver.hidden {
             display: none;
         }
+
         button {
             margin-top: 20px;
             padding: 12px 24px;
@@ -63,10 +152,12 @@
             font-family: 'Press Start 2P', cursive;
             transition: all 0.3s ease;
         }
+
         button:hover {
             background-color: #27AE60;
             transform: translateY(-2px);
         }
+
         .title {
             font-family: 'Press Start 2P', cursive;
             font-size: 24px;
@@ -74,95 +165,16 @@
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
-        
-        /* Documentation styles */
-        .documentation {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-        }
-        
-        .documentation h1 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 24px;
-            color: #2ECC71;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .documentation h2 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 18px;
-            color: #E74C3C;
-            margin-top: 30px;
-            margin-bottom: 20px;
-        }
-        
-        .documentation p {
-            margin-bottom: 15px;
-            color: #ECF0F1;
-        }
-        
-        .documentation code {
-            font-family: 'Fira Code', monospace;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #3498DB;
-        }
-        
-        .documentation pre {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 15px 0;
-        }
-        
-        .documentation pre code {
-            background: none;
-            padding: 0;
-        }
-        
-        .documentation ul, .documentation ol {
-            margin: 15px 0;
-            padding-left: 30px;
-            color: #ECF0F1;
-        }
-        
-        .documentation li {
-            margin: 8px 0;
-        }
-        
-        .documentation strong {
-            color: #F1C40F;
-        }
-        
-        .math-block {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            text-align: center;
-            color: #2ECC71;
-            font-family: 'Fira Code', monospace;
-        }
     </style>
 </head>
 <body>
-    <h1 class="title">NEAT Flappy Bird</h1>
-    
-    <!-- Game container -->
-    <div class="canvas-container">
-        <!-- Game canvases will be inserted here by JavaScript -->
+    <div class="game-section">
+        <h1 class="title">NEAT Flappy Bird</h1>
+        <div class="canvas-container">
+            <!-- Game canvases will be inserted here by JavaScript -->
+        </div>
     </div>
-    
-    <!-- Game over overlay -->
+
     <div id="gameOver" class="hidden">
         <h2>Game Over!</h2>
         <p>Score: <span id="score">0</span></p>
@@ -170,7 +182,6 @@
         <button id="restartButton">Restart</button>
     </div>
 
-    <!-- Documentation section -->
     <div class="documentation">
         <h1>NEAT Flappy Bird AI</h1>
         <p>A Flappy Bird game where AI birds learn to play through evolution! Watch 50 birds with tiny neural network brains figure out how to navigate pipes, passing their skills to the next generation. See their decision-making in real-time and track their improvement across generations.</p>
