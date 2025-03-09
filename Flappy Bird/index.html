@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>NEAT Flappy Bird</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
             display: flex;
@@ -74,10 +74,95 @@
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
+        
+        /* Documentation styles */
+        .documentation {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+        }
+        
+        .documentation h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 24px;
+            color: #2ECC71;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .documentation h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 18px;
+            color: #E74C3C;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .documentation p {
+            margin-bottom: 15px;
+            color: #ECF0F1;
+        }
+        
+        .documentation code {
+            font-family: 'Fira Code', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #3498DB;
+        }
+        
+        .documentation pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .documentation pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        .documentation ul, .documentation ol {
+            margin: 15px 0;
+            padding-left: 30px;
+            color: #ECF0F1;
+        }
+        
+        .documentation li {
+            margin: 8px 0;
+        }
+        
+        .documentation strong {
+            color: #F1C40F;
+        }
+        
+        .math-block {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            color: #2ECC71;
+            font-family: 'Fira Code', monospace;
+        }
     </style>
 </head>
 <body>
     <h1 class="title">NEAT Flappy Bird</h1>
+    
+    <!-- Game container -->
+    <div class="canvas-container">
+        <!-- Game canvases will be inserted here by JavaScript -->
+    </div>
+    
+    <!-- Game over overlay -->
     <div id="gameOver" class="hidden">
         <h2>Game Over!</h2>
         <p>Score: <span id="score">0</span></p>
@@ -85,9 +170,47 @@
         <button id="restartButton">Restart</button>
     </div>
 
+    <!-- Documentation section -->
+    <div class="documentation">
+        <h1>NEAT Flappy Bird AI</h1>
+        <p>A Flappy Bird game where AI birds learn to play through evolution! Watch 50 birds with tiny neural network brains figure out how to navigate pipes, passing their skills to the next generation. See their decision-making in real-time and track their improvement across generations.</p>
+        
+        <h2>How the Neural Network Works</h2>
+        <p>Each bird's brain uses 6 hidden nodes with Leaky ReLU activation to process information between 4 inputs and 1 output:</p>
+        
+        <div class="math-block">
+            h = LeakyReLU(w₁x₁ + w₂x₂ + w₃x₃ + w₄x₄ + b)
+        </div>
+        
+        <p>Where LeakyReLU is defined as:</p>
+        <div class="math-block">
+            LeakyReLU(x) = x if x > 0
+            LeakyReLU(x) = 0.01x if x ≤ 0
+        </div>
+        
+        <p>The final output uses a sigmoid function:</p>
+        <div class="math-block">
+            output = sigmoid(v₁h₁ + v₂h₂ + v₃h₃ + v₄h₄ + v₅h₅ + v₆h₆ + b_out)
+            sigmoid(x) = 1 / (1 + e^(-x))
+        </div>
+        
+        <h2>Features</h2>
+        <ul>
+            <li><strong>Neural Network Visualization:</strong> Real-time display of the network's decision-making</li>
+            <li><strong>Population Stats:</strong> Track generation count and bird performance</li>
+            <li><strong>Learning Process:</strong> Watch AI improve over generations</li>
+        </ul>
+        
+        <h2>Controls</h2>
+        <ul>
+            <li><strong>Space/Click:</strong> Manual flap (if you want to play)</li>
+            <li><strong>Restart Button:</strong> Reset current generation</li>
+        </ul>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
     <script src="config.js"></script>
     <script src="neat.js"></script>
     <script src="game.js"></script>
 </body>
-</html> 
+</html>
