@@ -10,22 +10,22 @@
             align-items: center;
             background-color: #333;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             font-family: 'Roboto', sans-serif;
             color: white;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .game-section {
-            position: sticky;
-            top: 0;
-            z-index: 1;
+            position: relative;
+            width: 100%;
             background-color: #333;
             padding: 20px 0;
-            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-bottom: 40px;
         }
 
         .canvas-container {
@@ -34,18 +34,29 @@
             align-items: flex-start;
             gap: 20px;
             margin-top: 20px;
+            flex-wrap: wrap;
+            padding: 0 20px;
         }
 
         canvas {
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            height: auto;
+        }
+
+        .content-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         /* Documentation styles */
         .documentation {
             max-width: 800px;
-            margin: 40px auto;
+            margin: 0 auto 40px auto;
             padding: 30px;
             background: rgba(0, 0, 0, 0.8);
             border-radius: 15px;
@@ -109,7 +120,6 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
 
-        /* Keep existing game-related styles */
         #gameOver {
             position: fixed;
             top: 50%;
@@ -175,48 +185,50 @@
         </div>
     </div>
 
+    <div class="content-wrapper">
+        <div class="documentation">
+            <h1>NEAT Flappy Bird AI</h1>
+            <p>A Flappy Bird game where AI birds learn to play through evolution! Watch 50 birds with tiny neural network brains figure out how to navigate pipes, passing their skills to the next generation. See their decision-making in real-time and track their improvement across generations.</p>
+            
+            <h2>How the Neural Network Works</h2>
+            <p>Each bird's brain uses 6 hidden nodes with Leaky ReLU activation to process information between 4 inputs and 1 output:</p>
+            
+            <div class="math-block">
+                h = LeakyReLU(w₁x₁ + w₂x₂ + w₃x₃ + w₄x₄ + b)
+            </div>
+            
+            <p>Where LeakyReLU is defined as:</p>
+            <div class="math-block">
+                LeakyReLU(x) = x if x > 0
+                LeakyReLU(x) = 0.01x if x ≤ 0
+            </div>
+            
+            <p>The final output uses a sigmoid function:</p>
+            <div class="math-block">
+                output = sigmoid(v₁h₁ + v₂h₂ + v₃h₃ + v₄h₄ + v₅h₅ + v₆h₆ + b_out)
+                sigmoid(x) = 1 / (1 + e^(-x))
+            </div>
+            
+            <h2>Features</h2>
+            <ul>
+                <li><strong>Neural Network Visualization:</strong> Real-time display of the network's decision-making</li>
+                <li><strong>Population Stats:</strong> Track generation count and bird performance</li>
+                <li><strong>Learning Process:</strong> Watch AI improve over generations</li>
+            </ul>
+            
+            <h2>Controls</h2>
+            <ul>
+                <li><strong>Space/Click:</strong> Manual flap (if you want to play)</li>
+                <li><strong>Restart Button:</strong> Reset current generation</li>
+            </ul>
+        </div>
+    </div>
+
     <div id="gameOver" class="hidden">
         <h2>Game Over!</h2>
         <p>Score: <span id="score">0</span></p>
         <p>Best Score: <span id="bestScore">0</span></p>
         <button id="restartButton">Restart</button>
-    </div>
-
-    <div class="documentation">
-        <h1>NEAT Flappy Bird AI</h1>
-        <p>A Flappy Bird game where AI birds learn to play through evolution! Watch 50 birds with tiny neural network brains figure out how to navigate pipes, passing their skills to the next generation. See their decision-making in real-time and track their improvement across generations.</p>
-        
-        <h2>How the Neural Network Works</h2>
-        <p>Each bird's brain uses 6 hidden nodes with Leaky ReLU activation to process information between 4 inputs and 1 output:</p>
-        
-        <div class="math-block">
-            h = LeakyReLU(w₁x₁ + w₂x₂ + w₃x₃ + w₄x₄ + b)
-        </div>
-        
-        <p>Where LeakyReLU is defined as:</p>
-        <div class="math-block">
-            LeakyReLU(x) = x if x > 0
-            LeakyReLU(x) = 0.01x if x ≤ 0
-        </div>
-        
-        <p>The final output uses a sigmoid function:</p>
-        <div class="math-block">
-            output = sigmoid(v₁h₁ + v₂h₂ + v₃h₃ + v₄h₄ + v₅h₅ + v₆h₆ + b_out)
-            sigmoid(x) = 1 / (1 + e^(-x))
-        </div>
-        
-        <h2>Features</h2>
-        <ul>
-            <li><strong>Neural Network Visualization:</strong> Real-time display of the network's decision-making</li>
-            <li><strong>Population Stats:</strong> Track generation count and bird performance</li>
-            <li><strong>Learning Process:</strong> Watch AI improve over generations</li>
-        </ul>
-        
-        <h2>Controls</h2>
-        <ul>
-            <li><strong>Space/Click:</strong> Manual flap (if you want to play)</li>
-            <li><strong>Restart Button:</strong> Reset current generation</li>
-        </ul>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
